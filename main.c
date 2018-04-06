@@ -35,10 +35,8 @@ void cat(const char* filepath){
 
 void cd(const char* path){
   // Switch current working directory to {dir}
-  if(chdir(path)==0){
-    printf("%s\n", path);
-    return;
-  } else err_sys("cd error");
+  if(chdir(path)==0) return;
+  else err_sys("cd error");
 }
 
 void _chmod(const char* mode, const char* name){
@@ -154,16 +152,25 @@ void rm(const char* filepath){
   else err_sys("rm error");
 }
 
-void _rmdir(const char* dirname){
+void _rmdir(const char* dirpath){
   // Remove an empty directory
-  printf("%s\n", dirname);
-  int c = find(dirname);
+  int count = 0;
+  DIR *dir;
+  struct dirent *ent;
 
-  if(c == 0){
-    if(rmdir(dirname)==0) return;
+  if((dir=opendir(dirpath)) != NULL){
+    while ((ent=readdir(dir)) != NULL)
+      if(strncmp(ent->d_name, ".", strlen(ent->d_name)) == 0 || strncmp(ent->d_name, "..", strlen(ent->d_name)) == 0){}
+      else count++;
+    closedir(dir);
+  } else
+    err_sys("No such directory\n");
+
+  if(count == 0){
+    if(rmdir(dirpath)==0) return;
     else err_sys("rmdir error");
   } else
-    printf("Cannot remove non-empty directory\n");
+    err_sys("rmdir error\n");
 }
 
 void _stat(const char* name){
@@ -199,10 +206,13 @@ void touch(const char* filename){
   // Create {file} if it does not exist,
   // or update its access and modification timestamp.
   int fd;
+  mode_t old_mask = umask((mode_t) 0);
+  int flag = 0666 & ~old_mask;
 
   // Ensure  that  this  call creates the file: if this flag is specified in conjunction with
   // O_CREAT, and pathname already exists, then open() will fail.
-  fd = open(filename, O_CREAT | O_WRONLY | O_EXCL, S_IRUSR | S_IWUSR);
+  fd = open(filename, O_CREAT | O_WRONLY | O_EXCL, flag);
+  umask(old_mask);
 
   if(fd < 0){
     // open failure
@@ -221,8 +231,18 @@ void touch(const char* filename){
   }
 }
 
-void _umask(const char* mode){
+mode_t _umask(const char* mode){
    // Change the umask of the current session.
+   int i;
+   i = strtol(mode, 0, 8);
+
+   mode_t old_mask, new_mask;
+
+   old_mask = umask((mode_t) i);
+
+   printf("Old mask = %04o\n", (int) old_mask);
+
+   return old_mask;
 }
 
 

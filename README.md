@@ -1,7 +1,8 @@
 # Secure Interactive Shell
 
-**A secure interactive shell running in a chroot'ed environment.
-No system binaries nor libraries are available in the chroot'ed environment.**
+**A secure interactive shell running in a chroot'ed environment.**
+
+**No system binaries nor libraries are available in the chroot'ed environment.**
 
 ## Requirements
 
@@ -13,7 +14,7 @@ Launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xin
     # How to config the xinetd service (See the example configuration in xinetd.conf file)
     $ sudo vi /etc/xinetd.conf
 
-## Compile && test locally (For Linux env)
+## Compile & Test locally (For Linux env)
 
     # Compile the code statically (meaning this program does not depend on any external libraries)
     $ gcc -static main.c -o bin/main
