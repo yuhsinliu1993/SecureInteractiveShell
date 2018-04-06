@@ -1,15 +1,16 @@
 # Secure Interactive Shell
 
-## A secure interactive shell running in a chroot'ed environment
+**A secure interactive shell running in a chroot'ed environment.
+No system binaries nor libraries are available in the chroot'ed environment.**
 
-## Requirement
+## Requirements
 
-We will launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xinetd)
+Launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xinetd)
 
     # How to install
     $ sudo apt-get install xinetd
 
-    # How to config the xinetd service (See the example configuration in **xinetd.conf** file)
+    # How to config the xinetd service (See the example configuration in xinetd.conf file)
     $ sudo vi /etc/xinetd.conf
 
 ## Compile && test locally (For Linux env)
