@@ -1,12 +1,18 @@
 # Secure Interactive Shell
 
-A secure interactive shell running in a chroot'ed environment
+## A secure interactive shell running in a chroot'ed environment
 
-You can launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xinetd)
-See the example configuration in **xinetd.conf** file
+## Requirement
 
+We will launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xinetd)
 
-How to compile && test locally (For Linux env):
+    # How to install
+    $ sudo apt-get install xinetd
+
+    # How to config the xinetd service (See the example configuration in **xinetd.conf** file)
+    $ sudo vi /etc/xinetd.conf
+
+## Compile && test locally (For Linux env)
 
     # Compile the code statically (meaning this program does not depend on any external libraries)
     $ gcc -static main.c -o bin/main
@@ -21,7 +27,6 @@ cat {file}:              Display content of {file}.
 cd {dir}:                Switch current working directory to {dir}.
 chmod {mode} {file/dir}: Change the mode (permission) of a file or directory.
                          {mode} is an octal number.
-			 Please do not follow symbolc links (not supported on Linux, but works on Mac).
 echo {str} [filename]:   Display {str}. If [filename] is given,
                          open [filename] and append {str} to the file.
 exit:                    Leave the shell.
