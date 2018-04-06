@@ -20,9 +20,9 @@ Launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xin
 ## Compile & Test locally (For Linux env)
 
     # Compile the code statically (meaning this program does not depend on any external libraries)
-    $ gcc -static main.c -o bin/main
+    $ mkdir bin && gcc -static main.c -o bin/main
 
-    # Test
+    # Test locally
     $ telnet localhost 33445
 
 
