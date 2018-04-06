@@ -62,7 +62,6 @@ void echo(const char* str, const char* filename){
 
 int find(const char* dirpath){
   // List files/dirs in the current working directory or [dir] if it is given.
-  int count = 0;
   DIR *dir;
   struct dirent *ent;
 
@@ -83,12 +82,9 @@ int find(const char* dirpath){
         default:       printf("        unknown?");         break;
       }
       dprintf(1, "%15lld\n", (long long)buf.st_size);
-
-      if(ent->d_name != "." && ent->d_name != "..") count++;
     }
 
     closedir(dir);
-    return count;
   } else
     err_sys("No such directory\n");
 
@@ -170,7 +166,7 @@ void _rmdir(const char* dirpath){
     if(rmdir(dirpath)==0) return;
     else err_sys("rmdir error");
   } else
-    err_sys("rmdir error\n");
+    printf("rmdir error: dir is not empty\n");
 }
 
 void _stat(const char* name){
