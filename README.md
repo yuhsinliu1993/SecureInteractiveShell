@@ -14,6 +14,9 @@ Launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xin
     # How to config the xinetd service (See the example configuration in xinetd.conf file)
     $ sudo vi /etc/xinetd.conf
 
+    # Restart xinetd
+    $ sudo /etc/init.d/xinetd restart
+
 ## Compile & Test locally (For Linux env)
 
     # Compile the code statically (meaning this program does not depend on any external libraries)
