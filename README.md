@@ -2,7 +2,7 @@
 
 A secure interactive shell running in a chroot'ed environment
 
-You can launch the program as a service using **[xinetd]**(https://en.wikipedia.org/wiki/Xinetd)
+You can launch the program as a service using [xinetd](https://en.wikipedia.org/wiki/Xinetd)
 See the example configuration in **xinetd.conf** file
 
 
